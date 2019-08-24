@@ -1,3 +1,8 @@
+# Google Calendar API
+client_id.json
+credentials.json
+token.yaml
+
 # SQlite3 database file
 *.db
 
