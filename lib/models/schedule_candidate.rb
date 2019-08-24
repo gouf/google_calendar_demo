@@ -3,6 +3,7 @@
 require File.join(__dir__, '..', 'api', 'google_calendar', 'google_calendar')
 require 'active_record'
 
+# Schedule モデルを親とした、スケジュール候補日を管理する
 class ScheduleCandidate < ActiveRecord::Base
   belongs_to :schedule
 
