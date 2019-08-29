@@ -44,5 +44,14 @@ class GoogleCalendar
     @calendar.insert_event('primary', event)
   end
 
+  def delete_event(calendar_id: 'primary', event_id:)
+    @calendar.delete_event(
+      calendar_id,
+      event_id,
+      send_notifications: false,
+      send_updates: 'none'
+    )
+  end
+
   alias :insert_event :register_event
 end
