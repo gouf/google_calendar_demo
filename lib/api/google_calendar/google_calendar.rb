@@ -3,7 +3,7 @@
 require 'google/apis/calendar_v3'
 require 'date'
 require 'active_support'
-require 'active_support/core_ext/date_time/calculations'
+require 'active_support/core_ext'
 
 require File.join(__dir__, 'auth')
 
