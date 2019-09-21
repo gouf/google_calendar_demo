@@ -10,9 +10,11 @@ ActiveRecord::Base.establish_connection config['development']
 ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'schedule_candidates'
     create_table :schedule_candidates do |table|
-      table.column :schedule_id,  :integer
-      table.column :event_id,     :string
-      table.column :datetime,     :datetime
+      table.column :schedule_id, :integer
+      table.column :event_id,    :string
+      table.column :description, :string
+      table.column :location,    :string
+      table.column :datetime,    :datetime
     end
   end
 end
