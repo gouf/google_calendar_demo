@@ -17,9 +17,9 @@ class ScheduleCandidate < ActiveRecord::Base
     calendar = GoogleCalendar.new
     created_event =
       calendar.insert_event(
-        summary: 'テスト作成',
+        summary: '面談? (未定)',
         location: '',
-        description: 'Google Calendar API を通して予定をテスト作成',
+        description: description,
         start_date_time: datetime
       )
 
