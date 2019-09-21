@@ -12,6 +12,7 @@ class GoogleCalendar
     APPLICATION_NAME = 'Google Calendar API Ruby Quickstart'
     CREDENTIALS_PATH = File.join(__dir__, 'credentials.json')
     SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_EVENTS
+    USER_ID = 'default'
 
     class << self
       def authorize
@@ -33,7 +34,7 @@ class GoogleCalendar
           code = gets
           credentials =
             authorizer.get_and_store_credentials_from_code(
-              user_id: user_id,
+              user_id: USER_ID,
               code: code,
               base_url: OOB_URI
             )
