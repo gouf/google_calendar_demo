@@ -147,6 +147,7 @@ DEPENDENCIES
   google-api-client
   guard
   guard-rspec
+  pry
   rspec
   rubocop
   vcr
