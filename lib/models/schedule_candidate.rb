@@ -13,12 +13,15 @@ class ScheduleCandidate < ActiveRecord::Base
 
   def insert_event_to_google_calendar
     calendar = GoogleCalendar.new
-    calendar.insert_event(
-      summary: 'テスト作成',
-      location: '',
-      description: 'Google Calendar API を通して予定をテスト作成',
-      start_date_time: datetime
-    )
+    created_event =
+      calendar.insert_event(
+        summary: 'テスト作成',
+        location: '',
+        description: 'Google Calendar API を通して予定をテスト作成',
+        start_date_time: datetime
+      )
+
+    self.event_id = created_event.id
   end
 end
 
