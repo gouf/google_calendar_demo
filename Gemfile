@@ -23,6 +23,8 @@ group :development, :test do
 end
 
 group :development do
+  # An IRB alternative and runtime developer console (http://pryrepl.org)
+  gem 'pry'
   # Guard keeps an eye on your file modifications (http://guardgem.org)
   gem 'guard'
   # Guard gem for RSpec (https://github.com/guard/guard-rspec)
