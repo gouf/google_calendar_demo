@@ -6,14 +6,14 @@ require 'active_record'
 class Schedule < ActiveRecord::Base
   has_many :schedule_candidates, dependent: :destroy
 
-  def create_candidates(datetime_array, description:, place:)
+  def create_candidates(datetime_array, description:, location:)
     Schedule.transaction do
       datetime_array.each do |datetime|
         ScheduleCandidate.create!(
           schedule_id: id,
           datetime: datetime,
           description: description,
-          place: place
+          location: location
         )
       end
     end
