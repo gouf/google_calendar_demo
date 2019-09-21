@@ -9,6 +9,8 @@ class ScheduleCandidate < ActiveRecord::Base
 
   before_create(:insert_event_to_google_calendar)
 
+  before_destroy(:delete_event_on_google_calendar)
+
   private
 
   def insert_event_to_google_calendar
@@ -23,5 +25,10 @@ class ScheduleCandidate < ActiveRecord::Base
 
     self.event_id = created_event.id
   end
-end
 
+  def delete_event_on_google_calendar
+    calendar = GoogleCalendar.new
+
+    calendar.delete_event(event_id: event_id)
+  end
+end
