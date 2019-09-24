@@ -18,4 +18,25 @@ class Schedule < ActiveRecord::Base
       end
     end
   end
+
+  class << self
+    # 面談日の確定
+    def create_decision_event(candidate_id)
+      deciding_candidate = ScheduleCandidate.find(candidate_id)
+
+      calendar = GoogleCalendar.new
+      calendar.insert_event(
+        summary: '面談',
+        location: deciding_candidate.location,
+        description: deciding_candidate.description,
+        start_date_time: deciding_candidate.datetime.to_datetime
+      )
+
+      root_record =
+        ScheduleCandidate.find(candidate_id).schedule
+
+      # 確定後の面談予定は管理しないのでレコードを削除
+      root_record.destroy
+    end
+  end
 end

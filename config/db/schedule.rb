@@ -11,8 +11,9 @@ ActiveRecord::Base.establish_connection config['development']
 ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'schedules'
     create_table :schedules do |table|
-      table.column :datetime, :datetime
-      table.column :definite, :boolean, default: false
+      table.column :corporation_name, :string
+      table.column :datetime,         :datetime
+      table.column :definite,         :boolean, default: false
     end
   end
 end
