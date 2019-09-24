@@ -3,6 +3,11 @@ require 'date'
 require File.join(__dir__, 'config', 'load_database_and_models')
 require File.join(__dir__, 'lib', 'calendar_event_man', 'calendar_event_man')
 
+#
+# Google Calendar に面談候補日を作成
+# 候補日をデータベースで管理し、確定時に候補予定日をカレンダーから削除・確定する
+#
+
 puts '面談日の候補に対する操作'
 puts '1: 複数候補日の作成'
 puts '2: 候補日から確定'

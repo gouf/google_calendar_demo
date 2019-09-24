@@ -1,4 +1,5 @@
 class CalendarEventMan
+  # ユーザに訊ねて、データベース・Google Calendar に作成済みの面談候補日から面談日を確定する (候補日の削除, 確定日の決定)
   class CandidateDecision
     def ask_all_for_need
       @schedule_id           = choose_corporation_name
@@ -46,6 +47,7 @@ class CalendarEventMan
       gets.chomp
     end
 
+    # 日本のタイムゾーンに日時表示を変換 (eg. 2019/09/24 (火) 23:50)
     def format_time_in_jpn(datetime)
       weekday = %w[
         日
