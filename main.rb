@@ -7,13 +7,13 @@ puts '面談日の候補に対する操作'
 puts '1: 複数候補日の作成'
 puts '2: 候補日から確定'
 
-choise = {
+choose = {
   '1' => :candidate_creation,
   '2' => :candidate_decision
 }[gets.chomp]
 
 event_man =
-  case choise
+  case choose
   when :candidate_creation
     CalendarEventMan::CandidateCreation.new
   when :candidate_decision
