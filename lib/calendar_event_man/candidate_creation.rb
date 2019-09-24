@@ -10,7 +10,7 @@ class CalendarEventMan
     end
 
     def proceed_task!
-      raise %(Can't save schedule candidates!) unless time_to_save_schedule_candidates?
+      raise %(Can't save schedule candidates!) unless can_proceed?
 
       schedule = ::Schedule.create(corporation_name: @corporation_name)
 
@@ -23,7 +23,7 @@ class CalendarEventMan
 
     private
 
-    def time_to_save_schedule_candidates?
+    def can_proceed?
       [
         @corporation_name,
         @candidates,
