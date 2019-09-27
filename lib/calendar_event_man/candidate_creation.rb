@@ -70,7 +70,7 @@ class CalendarEventMan
     def ask_event_description
       puts ''
       puts 'スケジュール内容の詳細 (会社名や面談のビル名・階数など) を入力してください'
-      puts 'EOF で入力終了'
+      puts '* EOF で入力終了'
 
       event_description = []
       until (input = gets.chomp).eql?('EOF') do
