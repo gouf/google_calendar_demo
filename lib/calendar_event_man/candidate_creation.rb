@@ -16,7 +16,7 @@ class CalendarEventMan
 
       schedule.create_candidates(
         @candidates.map { |date| DateTime.parse("#{date} #{@start_time}+09:00") },
-        description: @description,
+        description: "#{@corporation_name}\n#{@description}",
         location: @location
       )
     end
