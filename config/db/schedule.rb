@@ -12,8 +12,8 @@ ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'schedules'
     create_table :schedules do |table|
       table.column :corporation_name, :string
-      table.column :datetime,         :datetime
-      table.column :definite,         :boolean, default: false
+      table.column :description,      :string
+      table.column :location,         :string
     end
   end
 end
