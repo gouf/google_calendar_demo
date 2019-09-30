@@ -31,6 +31,7 @@ class CalendarEventMan
     def choose_schedule_candidate
       puts ''
       puts '確定する面談日時を選択してください'
+      puts '* 数字を半角で入力'
 
       corporations =
         ::Schedule.all

@@ -12,12 +12,15 @@ class CalendarEventMan
     def proceed_task!
       raise %(Can't save schedule candidates!) unless can_proceed?
 
-      schedule = ::Schedule.create(corporation_name: @corporation_name)
+      schedule =
+        ::Schedule.create!(
+          corporation_name: @corporation_name,
+          location: @location,
+          description: "#{@corporation_name}\n#{@description}"
+        )
 
       schedule.create_candidates(
-        @candidates.map { |date| DateTime.parse("#{date} #{@start_time}+09:00") },
-        description: "#{@corporation_name}\n#{@description}",
-        location: @location
+        @candidates.map { |date| DateTime.parse("#{date} #{@start_time}+09:00") }
       )
     end
 
