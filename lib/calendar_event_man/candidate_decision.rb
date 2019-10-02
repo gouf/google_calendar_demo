@@ -2,7 +2,7 @@ class CalendarEventMan
   # ユーザに訊ねて、データベース・Google Calendar に作成済みの面談候補日から面談日を確定する (候補日の削除, 確定日の決定)
   class CandidateDecision
     def ask_all_for_need
-      @schedule_id           = choose_corporation_name
+      @schedule_id           = choose_corporation_name_as_id
       @schedule_candidate_id = choose_schedule_candidate
     end
 
@@ -14,7 +14,7 @@ class CalendarEventMan
 
     private
 
-    def choose_corporation_name
+    def choose_corporation_name_as_id
       corporations =
         ::Schedule.all
                   .pluck(:id, :corporation_name)
