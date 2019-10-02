@@ -33,17 +33,12 @@ class CalendarEventMan
       puts '確定する面談日時を選択してください'
       puts '* 数字を半角で入力'
 
-      corporations =
-        ::Schedule.all
-                  .pluck(:id, :corporation_name)
+      schedule = ::Schedule.find(@schedule_id)
 
-      corporations.map do |id, corporation_name|
-        puts corporation_name
-        puts ::Schedule.find(id)
-                       .schedule_candidates
-                       .pluck(:id, :datetime)
-                       .map { |id, datetime| " #{id}: #{format_time_in_jpn(datetime)}" }
-      end
+      puts schedule.corporation_name
+      puts schedule.schedule_candidates
+                   .pluck(:id, :datetime)
+                   .map { |id, datetime| " #{id}: #{format_time_in_jpn(datetime)}" }
 
       gets.chomp
     end
