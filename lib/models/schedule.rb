@@ -43,7 +43,7 @@ class Schedule < ActiveRecord::Base
 
       # 候補日を束ねる親レコードを逆引き
       root_record =
-        ScheduleCandidate.find(candidate_id).schedule
+        deciding_candidate.schedule
 
       calendar = GoogleCalendar.new
       calendar.insert_event(
