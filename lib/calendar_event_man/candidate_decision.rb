@@ -23,7 +23,7 @@ class CalendarEventMan
       puts '企業名を選択してください'
       puts '* 数字を半角で入力'
 
-      puts corporations.map { |id, corporation_name| "#{id}: #{corporation_name}" }
+      puts(corporations.map { |id, corporation_name| "#{id}: #{corporation_name}" })
 
       gets.chomp
     end
@@ -36,9 +36,9 @@ class CalendarEventMan
       schedule = ::Schedule.find(@schedule_id)
 
       puts schedule.corporation_name
-      puts schedule.schedule_candidates
+      puts(schedule.schedule_candidates
                    .pluck(:id, :datetime)
-                   .map { |id, datetime| " #{id}: #{format_time_in_jpn(datetime)}" }
+                   .map { |id, datetime| " #{id}: #{format_time_in_jpn(datetime)}" })
 
       gets.chomp
     end
