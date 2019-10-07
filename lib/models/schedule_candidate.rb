@@ -9,6 +9,12 @@ class ScheduleCandidate < ActiveRecord::Base
 
   before_destroy(:delete_event_on_google_calendar)
 
+  def update_event_description_on_google_calendar(description)
+    calendar = GoogleCalendar.new
+
+    calendar.update_event(event_id: event_id, description: description)
+  end
+
   private
 
   def delete_event_on_google_calendar

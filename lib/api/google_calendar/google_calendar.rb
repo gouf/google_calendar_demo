@@ -53,5 +53,18 @@ class GoogleCalendar
     )
   end
 
+  def update_event(calendar_id: 'primary', event_id:, description:)
+    event = @calendar.get_event(calendar_id, event_id)
+    event.description = description
+
+    @calendar.update_event(
+      calendar_id,
+      event.id,
+      event,
+      send_notifications: false,
+      send_updates: 'none'
+    )
+  end
+
   alias :insert_event :register_event
 end
