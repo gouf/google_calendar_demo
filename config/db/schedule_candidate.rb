@@ -6,7 +6,9 @@ require 'yaml'
 config = YAML.load_file('./config/db.yml')
 # p config # for debug
 
-ActiveRecord::Base.establish_connection config['development']
+db_env = ENV['APP_DB_ENV'] || 'development'
+ActiveRecord::Base.establish_connection(config[db_env])
+
 ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'schedule_candidates'
     create_table :schedule_candidates do |table|

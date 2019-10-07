@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'sqlite3'
 require 'active_record'
 
 #

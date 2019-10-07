@@ -10,6 +10,8 @@ gem 'activerecord'
 gem 'google-api-client'
 # Automatic Ruby code style checking tool. (https://github.com/rubocop-hq/rubocop)
 gem 'rubocop'
+# This module allows Ruby programs to interface with the SQLite3 database engine (http://www.sqlite.org) (https://github.com/sparklemotion/sqlite3-ruby)
+gem 'sqlite3'
 
 group :development, :test do
   # the instafailing RSpec progress bar formatter (https://github.com/thekompanee/fuubar)
