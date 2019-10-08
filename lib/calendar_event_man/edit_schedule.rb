@@ -13,7 +13,11 @@ class CalendarEventMan
       schedule.description = new_description
       schedule.save!
 
-      schedule.schedule_candidates.each do |schedule_candidate|
+      update_event_description(schedule.schedule_candidates, new_description)
+    end
+
+    def update_event_description(schedule_candidates, new_description)
+      schedule_candidates.each do |schedule_candidate|
         schedule_candidate.update_event_description_on_google_calendar(new_description)
       end
     end
