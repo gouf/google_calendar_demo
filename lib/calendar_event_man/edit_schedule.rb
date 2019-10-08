@@ -9,7 +9,7 @@ class CalendarEventMan
 
     def proceed_task!
       schedule = ::Schedule.find(@schedule_id)
-      puts new_description = edit_description_on_text_file(schedule.description)
+      new_description = edit_description_on_text_file(schedule.description)
       schedule.description = new_description
       schedule.save!
 
