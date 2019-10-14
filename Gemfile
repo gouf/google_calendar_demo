@@ -20,7 +20,7 @@ group :development, :test do
   gem 'factory_bot'
   # the instafailing RSpec progress bar formatter (https://github.com/thekompanee/fuubar)
   gem 'fuubar'
-  # rspec-3.8.0 (http://github.com/rspec)
+  # rspec-3.9.0 (http://github.com/rspec)
   gem 'rspec'
   # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests. (https://relishapp.com/vcr/vcr/docs)
   gem 'vcr'
@@ -35,4 +35,9 @@ group :development do
   gem 'guard'
   # Guard gem for RSpec (https://github.com/guard/guard-rspec)
   gem 'guard-rspec'
+end
+
+group :test do
+  # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
+  gem 'simplecov'
 end
