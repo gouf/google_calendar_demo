@@ -30,7 +30,9 @@ class CalendarEventMan
       tempfile.write(description_string)
       tempfile.close
 
-      system("vim #{tempfile.path}")
+      editor = ENV['EDITOR'] || 'vim'
+      system("#{editor} #{tempfile.path}")
+
       ret = File.read(tempfile.path)
 
       tempfile.delete
