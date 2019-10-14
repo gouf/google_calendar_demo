@@ -12,6 +12,8 @@ gem 'google-api-client'
 gem 'rubocop'
 # This module allows Ruby programs to interface with the SQLite3 database engine (http://www.sqlite.org) (https://github.com/sparklemotion/sqlite3-ruby)
 gem 'sqlite3'
+# Rake is a Make-like program implemented in Ruby (https://github.com/ruby/rake)
+gem 'rake'
 
 group :development, :test do
   # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
