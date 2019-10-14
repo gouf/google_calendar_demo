@@ -2,6 +2,8 @@ require 'webmock/rspec'
 require 'vcr'
 require 'factory_bot'
 require 'database_cleaner'
+require 'simplecov'
+SimpleCov.start
 # require 'database_cleaner/active_record'
 require File.join(__dir__, '..', 'lib', 'api', 'google_calendar', 'google_calendar')
 require File.join(__dir__, '..', 'lib', 'calendar_event_man', 'calendar_event_man')
