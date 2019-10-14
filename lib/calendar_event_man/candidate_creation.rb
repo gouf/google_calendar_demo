@@ -3,6 +3,7 @@ class CalendarEventMan
   class CandidateCreation
     def ask_all_for_need
       @corporation_name = ask_corporation_name
+      show_already_scheduled_event
       @candidates       = ask_schedule_candidates
       @start_time       = ask_event_start_time
       @location         = ask_scheduled_location
@@ -34,6 +35,21 @@ class CalendarEventMan
         @location,
         @description
       ].all? { |value| !value.empty? }
+    end
+
+    def show_already_scheduled_event
+      puts ''
+      puts '既存スケジュール 一覧 (候補日):'
+      schedule_candidates =
+        ::Schedule.all
+                  .map(&:schedule_candidates)
+                  .flatten
+      puts(
+        schedule_candidates.sort
+                           .map(&:datetime)
+                           .map(&method(:format_time_in_jpn))
+                           .map { |datetime| "* #{datetime}" }
+      )
     end
 
     def ask_corporation_name
@@ -81,6 +97,11 @@ class CalendarEventMan
       end
 
       event_description.join("\n")
+    end
+
+    # Ref: lib/calendar_event_man/calendar_event_man.rb # format_time_in_jpn
+    def format_time_in_jpn(datetime)
+      ::CalendarEventMan.format_time_in_jpn(datetime)
     end
   end
 end
