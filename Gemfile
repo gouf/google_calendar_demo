@@ -14,6 +14,10 @@ gem 'rubocop'
 gem 'sqlite3'
 
 group :development, :test do
+  # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
+  gem 'database_cleaner'
+  # factory_bot provides a framework and DSL for defining and using model instance factories. (https://github.com/thoughtbot/factory_bot)
+  gem 'factory_bot'
   # the instafailing RSpec progress bar formatter (https://github.com/thekompanee/fuubar)
   gem 'fuubar'
   # rspec-3.8.0 (http://github.com/rspec)
