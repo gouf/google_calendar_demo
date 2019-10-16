@@ -19,9 +19,6 @@ jobs:
     - name: Install sqlite3 package
       run: |
         sudo apt-get install -y libsqlite3-dev
-    - name: Set Google Calendar credentials
-      run: |
-        echo "${{ secrets.GOOGLE_CALENDAR_CREDENTIAL }}" > lib/api/google_calendar/credentials.json
     - name: Build and test with Rake
       run: |
         gem install bundler
