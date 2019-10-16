@@ -1,0 +1,126 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://oauth2.googleapis.com/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=refresh_token&refresh_token=1%2FH-Rvv1DOzIB0SgqvvYyeWMKlixxxxxxxxxxxxxxxxxx&client_id=000000000000-9kujkkjik20v9phimadqpegr4oq4faqs.apps.googleusercontent.com&client_secret=0gdQ9mxxxxxxxxxxxxxxxxxx
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Origin
+      - Referer
+      - X-Origin
+      Date:
+      - Mon, 07 Oct 2019 07:20:55 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="46,43",h3-Q048=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "access_token": "ya29.ImCUB9Bdxpxxxxxxxxxx-CI9gklVZF4VLOtDfn_L97tceaBJHDfGOauazR5TSQq9O0WXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-MHGHtYcOxoBxxxxxxxxx",
+          "expires_in": 3600,
+          "scope": "https://www.googleapis.com/auth/calendar.events",
+          "token_type": "Bearer"
+        }
+    http_version:
+  recorded_at: Mon, 07 Oct 2019 07:20:55 GMT
+- request:
+    method: delete
+    uri: https://www.googleapis.com/calendar/v3/calendars/primary/events/foobar?sendNotifications=false&sendUpdates=none
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - Google Calendar API Ruby Quickstart/0.0.0 google-api-ruby-client/0.30.8 Mac
+        OS X/10.14.6 (gzip)
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip,deflate
+      Date:
+      - Mon, 07 Oct 2019 07:20:55 GMT
+      Authorization:
+      - Bearer ya29.ImCUB9Bdxpxxxxxxxxxx-CI9gklVZF4VLOtDfn_L97tceaBJHDfGOauazR5TSQq9O0WXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-MHGHtYcOxoBxxxxxxxxx
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Vary:
+      - Origin
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Encoding:
+      - gzip
+      Date:
+      - Mon, 07 Oct 2019 07:20:55 GMT
+      Expires:
+      - Mon, 07 Oct 2019 07:20:55 GMT
+      Cache-Control:
+      - private, max-age=0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="46,43",h3-Q048=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+         "error": {
+          "errors": [
+           {
+            "domain": "global",
+            "reason": "notFound",
+            "message": "Not Found"
+           }
+          ],
+          "code": 404,
+          "message": "Not Found"
+         }
+        }
+    http_version:
+  recorded_at: Mon, 07 Oct 2019 07:20:55 GMT
+recorded_with: VCR 5.0.0
