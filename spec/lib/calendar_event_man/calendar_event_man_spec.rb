@@ -4,6 +4,6 @@ describe CalendarEventMan do
 
     subject { CalendarEventMan.format_time_in_jpn(datetime) }
 
-    it { is_expected.to eq '2019/10/15 (火) 03:00' }
+    it { is_expected.to eq '2019年10月15日 (火) 03:00' }
   end
 end
