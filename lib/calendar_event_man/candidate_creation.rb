@@ -23,6 +23,11 @@ class CalendarEventMan
       schedule.create_candidates(
         @candidates.map { |date| DateTime.parse("#{date} #{@start_time}+09:00") }
       )
+
+      # 記録済みスケジュール候補をユーザに一覧表示形式で返す
+      @candidates.each.with_index(1) do |candidate, i|
+        puts "#{i}. #{format_time_in_jpn(DateTime.parse("#{candidate} #{@start_time}+09:00"))}"
+      end
     end
 
     private

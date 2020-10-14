@@ -17,7 +17,7 @@ class CalendarEventMan
       ][datetime.to_date.cwday]
 
       datetime.in_time_zone('Asia/Tokyo')
-              .strftime("%Y/%m/%d (#{weekday}) %H:%M")
+              .strftime("%Y年%m月%d日 (#{weekday}) %H:%M")
     end
   end
 end
