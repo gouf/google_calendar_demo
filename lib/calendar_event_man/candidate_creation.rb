@@ -59,14 +59,14 @@ class CalendarEventMan
 
     def ask_corporation_name
       puts ''
-      puts '面談 企業名を入力してください'
+      puts '面談 企業名を入力してください (*必須)'
       gets.chomp
     end
 
     # 一般に3つ候補日を挙げるので3つを指定。それ以上でも可。制限してない
     def ask_schedule_candidates
       puts ''
-      puts '面談候補日を入力してください'
+      puts '面談候補日を入力してください (*必須)'
       puts '* 日付は yyyy/mm/dd 形式'
       puts '* 「,」区切りで3つ入力'
 
@@ -77,7 +77,7 @@ class CalendarEventMan
     # Ref: lib/api/google_calendar/google_calendar.rb # register_event
     def ask_event_start_time
       puts ''
-      puts '面談の開始時刻を入力してください'
+      puts '面談の開始時刻を入力してください (*必須)'
       puts '* hh:mm 形式'
 
       # 別の処理からの入力で得られた日付情報と結合するのに使う
@@ -86,7 +86,7 @@ class CalendarEventMan
 
     def ask_scheduled_location
       puts ''
-      puts '面談場所の住所を入力してください'
+      puts '面談場所の住所を入力してください (*必須)'
 
       gets.chomp
     end
