@@ -38,7 +38,6 @@ class CalendarEventMan
         @candidates,
         @start_time,
         @location,
-        @description
       ].all? { |value| !value.empty? }
     end
 
