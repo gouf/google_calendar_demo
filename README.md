@@ -42,3 +42,8 @@ default: '{"client_id":"000000000000-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googl
 ```
 
 以降の認証は設定期限経過まで要求されない
+
+
+# 使いかた
+
+`bundle exec ruby main.rb` を実行する
