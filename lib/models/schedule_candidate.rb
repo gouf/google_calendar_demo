@@ -21,5 +21,7 @@ class ScheduleCandidate < ActiveRecord::Base
     calendar = GoogleCalendar.new
 
     calendar.delete_event(event_id: event_id)
+  rescue Google::Apis::ClientError => e
+    puts e.message
   end
 end
