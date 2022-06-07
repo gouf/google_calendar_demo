@@ -1,0 +1,7 @@
+development:
+  adapter: 'sqlite3'
+  database: './app.db'
+
+test:
+  adapter: 'sqlite3'
+  database: './app_test.db'
