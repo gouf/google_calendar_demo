@@ -1,45 +1,103 @@
-# frozen_string_literal: true
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-source 'https://rubygems.org'
+ruby "3.1.2"
 
-git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 7.0.3"
 
-# Object-relational mapper framework (part of Rails). (https://rubyonrails.org)
-gem 'activerecord'
-# Client for accessing Google APIs (https://github.com/google/google-api-ruby-client)
-gem 'google-api-client'
-# Automatic Ruby code style checking tool. (https://github.com/rubocop-hq/rubocop)
-gem 'rubocop'
-# This module allows Ruby programs to interface with the SQLite3 database engine (http://www.sqlite.org) (https://github.com/sparklemotion/sqlite3-ruby)
-gem 'sqlite3'
-# Rake is a Make-like program implemented in Ruby (https://github.com/ruby/rake)
-gem 'rake'
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
+# Use sqlite3 as the database for Active Record
+gem "sqlite3", "~> 1.4"
+
+# Use the Puma web server [https://github.com/puma/puma]
+gem "puma", "~> 5.0"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
+# Use Redis adapter to run Action Cable in production
+# gem "redis", "~> 4.0"
+
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
+
+# Use Sass to process CSS
+# gem "sassc-rails"
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
-  gem 'database_cleaner'
-  # factory_bot provides a framework and DSL for defining and using model instance factories. (https://github.com/thoughtbot/factory_bot)
-  gem 'factory_bot'
-  # the instafailing RSpec progress bar formatter (https://github.com/thekompanee/fuubar)
-  gem 'fuubar'
-  # rspec-3.9.0 (http://github.com/rspec)
-  gem 'rspec'
-  # Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests. (https://relishapp.com/vcr/vcr/docs)
-  gem 'vcr'
-  # Library for stubbing HTTP requests in Ruby. (http://github.com/bblimke/webmock)
-  gem 'webmock'
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
-  # An IRB alternative and runtime developer console (http://pryrepl.org)
-  gem 'pry'
-  # Guard keeps an eye on your file modifications (http://guardgem.org)
-  gem 'guard'
-  # Guard gem for RSpec (https://github.com/guard/guard-rspec)
-  gem 'guard-rspec'
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+
+  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  # gem "rack-mini-profiler"
+
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # gem "spring"
+end
+
+
+group :doc do
+  gem "yard"
+end
+gem "rb-readline"
+gem "slim-rails"
+gem "rails_safe_tasks"
+gem "nprogress-rails"
+gem "bootstrap"
+gem "freeezer"
+
+group :development do
+  gem "annotate"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "bullet"
+  gem "guard"
+  gem "guard-rspec"
+  gem "pry-byebug"
+  gem "pry-rails"
+  gem "rubocop", require: false
+  gem "squasher"
 end
 
 group :test do
-  # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
-  gem 'simplecov'
+  gem "capybara"
+  gem "database_cleaner"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "fuubar"
+  gem "launchy"
+  gem "mutant-rspec"
+  gem "rspec-rails"
+  gem "selenium-webdriver"
+  gem "timecop"
 end
+

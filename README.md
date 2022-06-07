@@ -1,49 +1,25 @@
-# インストール
+# README
 
-## Gem のインストール
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-```sh
-bundle install
-```
+Things you may want to cover:
 
-## `credentials.json` の設置
+* Ruby version
 
-次の path に認証情報を記録した JSON ファイルを設置する
+* System dependencies
 
-`lib/api/google_calendar/credentials.json`
+* Configuration
 
-当該ファイルは「[Ruby Quickstart  |  Calendar API  |  Google Developers](https://developers.google.com/calendar/quickstart/ruby)」から得られる
+* Database creation
 
-```json
-{"installed":{"client_id":"000000000000-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com","project_id":"quickstart-0000000000000","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"xxxxxxxxxxxxxxxxxxxxxxxx","redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}
-```
+* Database initialization
 
+* How to run the test suite
 
-### 認証の実行
+* Services (job queues, cache servers, search engines, etc.)
 
-```sh
-bundle exec ruby main.rb
-```
+* Deployment instructions
 
-適当なスケジュールを作成し、Google Calendar API の認証処理を走らせる
+* ...
 
-指示に従い認証する
-
-
-### `token.yaml` の生成
-
-認証が終われば `token.yaml` が生成される
-
-`lib/api/google_calendar/token.yaml`
-
-```yaml
----
-default: '{"client_id":"000000000000-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com","access_token":"xxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxx","refresh_token":"0/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","scope":["https://www.googleapis.com/auth/calendar.events"],"expiration_time_millis":1613176786000}'
-```
-
-以降の認証は設定期限経過まで要求されない
-
-
-# 使いかた
-
-`bundle exec ruby main.rb` を実行する
