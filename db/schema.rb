@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_31_094941) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_121235) do
+  create_table "meeting_schedule_candidates", force: :cascade do |t|
+    t.string "google_calendar_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_meeting_schedule_candidates_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
