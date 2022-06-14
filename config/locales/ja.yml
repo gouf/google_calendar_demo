@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: '名前'
+      meeting_schedule_candidate:
+        date: '候補日'
+  helpers:
+    label:
+      user:
+        name: '名前'
+      meeting_schedule_candidate:
+        date: '候補日'
+        description: '詳細メモ'
