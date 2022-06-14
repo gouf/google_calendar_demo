@@ -31,5 +31,8 @@ class HomeController < ApplicationController
     calendar.authorization = client
 
     @events = calendar.list_events('primary')
+  rescue Google::Apis::AuthorizationError
+    @events = []
+    log_out
   end
 end
