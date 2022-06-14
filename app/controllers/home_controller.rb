@@ -9,6 +9,7 @@ class HomeController < ApplicationController
 
   def create
     # TODO: 仮実装として Google Calendar イベントの作成をする
+    # TODO: 仮実装を終えたら 適切なコントローラに処理を移設する
   end
 
   private

@@ -12,11 +12,9 @@ class SessionsController < ApplicationController
       #   scope="https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid"
       #   token="ya29.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       # >
-      #
-      # Google Calendar API 利用に必要なトークン
-      session[:access_token] = auth_hash.credentials.token
 
-      log_in user
+      # token: Google Calendar API 利用に必要なトークン
+      log_in(user, auth_hash.credentials.token)
     end
 
     redirect_to root_path
