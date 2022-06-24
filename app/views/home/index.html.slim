@@ -2,13 +2,12 @@ h1 Home#index
 
 - if current_user.present?
   / TODO: form のデータを投げる url を 他の適切なコントローラに差し替える
-  = form_with url: 'home/create', model: current_user, method: :post do |f|
-    = f.hidden_field :id
+  = form_with url: meeting_schedule_candidate_create_path, method: :post do |f|
     p
       - 3.times.with_index(1) do |_, i|
         = f.fields_for 'meeting_schedule_candidate[]', MeetingScheduleCandidate.new do |m|
           = m.label :date, "#{t('helpers.label.meeting_schedule_candidate.date')} #{i}: "
-          = m.date_field :date
+          = m.date_field :date, class: 'js-apply-date-select-from'
           br
     / TODO: コントローラ側で時刻固定設定の実装をする
     p 開始時刻 → 14:00〜17:00 の間で固定
@@ -18,8 +17,9 @@ h1 Home#index
         br
         = m.text_area :description, cols: 55, rows: 10, placeholder: "(〇〇サービス経由で紹介を受ける)\n\n△△会社名\n\n☓☓サービスを展開"
         br
-    p
-      = label_tag :copay_and_paste, 'コピペ欄:'
-      br
-      / TODO: 候補日を選択したとき JS イベントを発火させて <textarea/> の内容を差し替える (選択候補日と 希望日とを対応させる)
-      = text_area_tag :copay_and_paste, '', cols: 55, rows: 5, readonly: true, placeholder: "1. n月m日 (月) 14:00〜17:00 に開始\n2. n月m日 (月) 14:00〜17:00 に開始\n3. n月m日 (月) 14:00〜17:00 に開始"
+    = f.submit
+  p
+    = label_tag :copay_and_paste, 'コピペ欄:'
+    br
+    / 候補日を選択したとき JS イベントを発火させて <textarea/> の内容を差し替える (選択候補日と 希望日とを対応させる)
+    = text_area_tag :copay_and_paste, '', cols: 55, rows: 5, readonly: true, class: 'js-apply-date-select-to', placeholder: "1. n月m日 (月) 14:00〜17:00 に開始\n2. n月m日 (月) 14:00〜17:00 に開始\n3. n月m日 (月) 14:00〜17:00 に開始"
