@@ -185,6 +185,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jsbundling-rails (1.0.2)
+      railties (>= 6.0.0)
     jwt (2.3.0)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -278,6 +280,8 @@ GEM
     rack (2.2.3.1)
     rack-protection (2.2.0)
       rack
+    rack-proxy (0.7.2)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.3)
@@ -370,6 +374,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    semantic_range (3.0.0)
     shellany (0.0.1)
     signet (0.16.1)
       addressable (~> 2.8)
@@ -419,6 +424,11 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webpacker (5.4.3)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     webrick (1.7.0)
     websocket (1.2.9)
     websocket-driver (0.7.5)
@@ -453,6 +463,7 @@ DEPENDENCIES
   guard-rspec
   importmap-rails
   jbuilder
+  jsbundling-rails
   launchy
   mutant-rspec
   nprogress-rails
@@ -468,7 +479,6 @@ DEPENDENCIES
   rubocop
   selenium-webdriver
   slim-rails
-  sprockets-rails
   sqlite3 (~> 1.4)
   squasher
   stimulus-rails
@@ -476,6 +486,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  webpacker
   yard
 
 RUBY VERSION
@@ -483,4 +494,3 @@ RUBY VERSION
 
 BUNDLED WITH
    2.3.14
-
