@@ -1,7 +1,6 @@
 h1 Home#index
 
 - if current_user.present?
-  / TODO: form のデータを投げる url を 他の適切なコントローラに差し替える
   = form_with url: meeting_schedule_candidate_create_path, method: :post do |f|
     p
       - 3.times.with_index(1) do |_, i|
@@ -9,7 +8,6 @@ h1 Home#index
           = m.label :date, "#{t('helpers.label.meeting_schedule_candidate.date')} #{i}: "
           = m.date_field :date, class: 'js-apply-date-select-from'
           br
-    / TODO: コントローラ側で時刻固定設定の実装をする
     p 開始時刻 → 14:00〜17:00 の間で固定
     p
       = f.fields_for 'meeting_schedule_candidate[]', MeetingScheduleCandidate.new do |m|
