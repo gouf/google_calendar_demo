@@ -12,3 +12,9 @@ ja:
       meeting_schedule_candidate:
         date: '候補日'
         description: '詳細メモ'
+  date:
+    formats:
+      default: "%Y年%-m月%-d日"
+  time:
+    formats:
+      default: "%Y年%-m月%-d日 %H:%M"
