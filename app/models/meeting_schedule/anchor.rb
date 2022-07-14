@@ -25,4 +25,13 @@ class MeetingSchedule::Anchor < ApplicationRecord
   # TODO: 確定日を Google Calendar のイベントとして作成する
   # TODO: 候補日をレコード・Google Calendar イベント共に削除する
   # MEMO: models/meeting_schedule_candidate.rb#google_calendar_client を使いたいので module に切り出す...? (attr_accessor も一緒に切り出せる?)
+
+  # 候補日に記録してある description の中身を6行だけ返す
+  def description_summary
+    meeting_schedule_candidates.first
+                               .description
+                               .lines
+                               .first(6)
+                               .then { |array| [*array, '...'] }
+  end
 end

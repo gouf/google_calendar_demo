@@ -12,7 +12,5 @@
 # 面談候補日をまとめる中間テーブル
 class MeetingSchedule::Group < ApplicationRecord
   belongs_to :meeting_schedule_anchor, class_name: 'MeetingSchedule::Anchor'
-  belongs_to :meeting_schedule_candidate,
-             class_name: 'MeetingSchedule::Candidate',
-             dependent: :destroy
+  belongs_to :meeting_schedule_candidate, class_name: 'MeetingSchedule::Candidate'
 end

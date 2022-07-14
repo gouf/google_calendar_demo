@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post 'meeting_schedule_candidate/create'
-  post 'meeting_schedule_candidate/destroy'
+  delete 'meeting_schedule_anchor/:id/destroy', to: 'meeting_schedule_anchor#destroy'
 
   get 'home/index'
   get 'auth/:provider/callback', to: 'sessions#create'

@@ -24,23 +24,22 @@ h1 Home#index
       = text_area_tag :copay_and_paste, '', cols: 55, rows: 5, readonly: true, class: 'js-apply-date-select-to', placeholder: "1. n月m日 (月) 14:00〜17:00 に開始\n2. n月m日 (月) 14:00〜17:00 に開始\n3. n月m日 (月) 14:00〜17:00 に開始"
     p
       = f.submit
-h2 候補日群
+  h2 候補日群
 
-p
-  - @meeting_schedule_anchors.to_a.uniq.each.with_index do |meeting_schedule_anchor, index|
-    p
-      / TODO: 候補日に関わる概要を表示する
-      / 最初の3行程度を表示して、クリックで全文表示に切り替える
-      / 全文表示からのクリックで 3行表示に切り替える
-      h3
-        - meeting_schedule_anchor.meeting_schedule_candidates.first.description.lines.first(3).each do |line|
-          = line
-          br
-        = button_to '候補日群を削除する', "##{meeting_schedule_anchor.id}"
-      ul
-        - meeting_schedule_anchor.meeting_schedule_candidates.each do |candidate|
-          li
-            = l candidate.date
-            = button_to '確定する', "##{candidate.id}"
+  p
+    - @meeting_schedule_anchors.each do |meeting_schedule_anchor|
+      p
+        h3
+          / 候補日に記録してある description の中身を数行だけ表示する
+          - meeting_schedule_anchor.description_summary.each do |line|
+            = line
             br
-    hr
+          = button_to '候補日群を削除する', "/meeting_schedule_anchor/#{meeting_schedule_anchor.id}/destroy", method: :delete
+        ul
+          - meeting_schedule_anchor.meeting_schedule_candidates.each do |candidate|
+            li
+              = l candidate.date
+              / TODO: 確定ボタンを機能させる
+              = button_to '確定する', "##{candidate.id}"
+              br
+      hr

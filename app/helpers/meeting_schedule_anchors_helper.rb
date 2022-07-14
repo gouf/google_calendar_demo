@@ -1,0 +1,2 @@
+module MeetingScheduleAnchorsHelper
+end
