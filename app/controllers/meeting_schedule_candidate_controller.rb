@@ -5,23 +5,42 @@ class MeetingScheduleCandidateController < ApplicationController
   # (レコードにイベントを登録することで Google Calendar 側の ID の保持・管理ができる)
   # (カレンダー情報の更新削除ができる)
   def create
-    schedule_candidate_hash = build_schedule_candidates_structure
+    candidate_hash = build_schedule_candidates_structure
 
     # View から 3 レコード分送られてくるので処理
-    MeetingScheduleCandidate.transaction do
-      # 3 レコード分送られてくるので 受け入れインスタンスを生成する
-      schedule_candidate_hash[:days].each do |schedule_candidate_day|
-        meeting_schedule_candidate = MeetingScheduleCandidate.new
+    #
+    # Anchor -> Group -> Candidate の関連をもたせたレコードを作成
+    # current_user.id があれば Anchor から Candidate を引っ張ってこられる
+    MeetingSchedule::Candidate.transaction do
 
-        meeting_schedule_candidate.user_id = current_user.id
+      anchor = MeetingSchedule::Anchor.new(user_id: current_user.id)
+      anchor.save!
+
+      # 3 レコード分送られてくるので 受け入れインスタンスを生成する
+      candidate_hash[:days].each do |candidate_day|
+        #
+        # Candidate レコード作成
+        #
+        candidate = MeetingSchedule::Candidate.new
+
         # NOTE: モデルに Google Calendar API へのアクセスを任せているので、何らかの形で access_token を渡す必要がある
-        meeting_schedule_candidate.access_token = session[:access_token]
-        meeting_schedule_candidate.description = schedule_candidate_hash[:description]
+        candidate.access_token = session[:access_token]
+        candidate.description = candidate_hash[:description]
         # NOTE: schedule_candidate_day は日付情報のみ保持 (eg. "2022-06-24")
         # NOTE: 作成するイベントの日時は 14:00〜17:00 に固定しているので 開始時刻は 14:00 設定
-        meeting_schedule_candidate.date = "#{schedule_candidate_day} 14:00:00"
+        candidate.date = "#{candidate_day} 14:00:00"
 
-        meeting_schedule_candidate.save!
+        candidate.save!
+
+        #
+        # Group レコード作成
+        #
+        group =
+          MeetingSchedule::Group.new(
+            meeting_schedule_anchor_id: anchor.id,
+            meeting_schedule_candidate_id: candidate.id
+          )
+        group.save!
       end
     end
 
@@ -45,8 +64,10 @@ class MeetingScheduleCandidateController < ApplicationController
   # create アクションでモデルに情報を渡しやすいように Hash にまとめる
   def build_schedule_candidates_structure
     {
+      # description のみ抜き出す
       description: schedule_candidates_params.find(&method(:only_schedule_candidate_description))[:description],
-      days: schedule_candidates_params.find_all(&method(:only_schedule_candidate_date))
+      # 候補日のみ抜き出す
+      days: schedule_candidates_params.find_all(&method(:only_schedule_candidate_date)).map { |date| date[:date] }
     }
   end
 

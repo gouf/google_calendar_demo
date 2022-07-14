@@ -1,23 +1,46 @@
+/ NOTE: 現在の実装だと「入力作業を終えて submit」「submit 後には候補日のコピペ欄が空白になり利用できない」流れになっている
+
 h1 Home#index
 
 - if current_user.present?
   = form_with url: meeting_schedule_candidate_create_path, method: :post do |f|
     p
       - 3.times.with_index(1) do |_, i|
-        = f.fields_for 'meeting_schedule_candidate[]', MeetingScheduleCandidate.new do |m|
+        = f.fields_for 'meeting_schedule_candidate[]', MeetingSchedule::Candidate.new do |m|
           = m.label :date, "#{t('helpers.label.meeting_schedule_candidate.date')} #{i}: "
           = m.date_field :date, class: 'js-apply-date-select-from'
           br
     p 開始時刻 → 14:00〜17:00 の間で固定
     p
-      = f.fields_for 'meeting_schedule_candidate[]', MeetingScheduleCandidate.new do |m|
+      = f.fields_for 'meeting_schedule_candidate[]', MeetingSchedule::Candidate.new do |m|
         = m.label :description
         br
         = m.text_area :description, cols: 55, rows: 10, placeholder: "(〇〇サービス経由で紹介を受ける)\n\n△△会社名\n\n☓☓サービスを展開"
         br
-    = f.submit
-  p
-    = label_tag :copay_and_paste, 'コピペ欄:'
-    br
-    / 候補日を選択したとき JS イベントを発火させて <textarea/> の内容を差し替える (選択候補日と 希望日とを対応させる)
-    = text_area_tag :copay_and_paste, '', cols: 55, rows: 5, readonly: true, class: 'js-apply-date-select-to', placeholder: "1. n月m日 (月) 14:00〜17:00 に開始\n2. n月m日 (月) 14:00〜17:00 に開始\n3. n月m日 (月) 14:00〜17:00 に開始"
+    p
+      = label_tag :copay_and_paste, 'コピペ欄:'
+      br
+      / 候補日を選択したとき JS イベントを発火させて <textarea/> の内容を差し替える (選択候補日と 希望日とを対応させる)
+      = text_area_tag :copay_and_paste, '', cols: 55, rows: 5, readonly: true, class: 'js-apply-date-select-to', placeholder: "1. n月m日 (月) 14:00〜17:00 に開始\n2. n月m日 (月) 14:00〜17:00 に開始\n3. n月m日 (月) 14:00〜17:00 に開始"
+    p
+      = f.submit
+h2 候補日群
+
+p
+  - @meeting_schedule_anchors.to_a.uniq.each.with_index do |meeting_schedule_anchor, index|
+    p
+      / TODO: 候補日に関わる概要を表示する
+      / 最初の3行程度を表示して、クリックで全文表示に切り替える
+      / 全文表示からのクリックで 3行表示に切り替える
+      h3
+        - meeting_schedule_anchor.meeting_schedule_candidates.first.description.lines.first(3).each do |line|
+          = line
+          br
+        = button_to '候補日群を削除する', "##{meeting_schedule_anchor.id}"
+      ul
+        - meeting_schedule_anchor.meeting_schedule_candidates.each do |candidate|
+          li
+            = l candidate.date
+            = button_to '確定する', "##{candidate.id}"
+            br
+    hr
