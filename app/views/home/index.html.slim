@@ -39,7 +39,6 @@ h1 Home#index
           - meeting_schedule_anchor.meeting_schedule_candidates.each do |candidate|
             li
               = l candidate.date
-              / TODO: 確定ボタンを機能させる
-              = button_to '確定する', "##{candidate.id}"
+              = button_to '確定する', "/meeting_schedule_confirm/anchor/#{meeting_schedule_anchor.id}/candidate/#{candidate.id}/create"
               br
       hr
