@@ -1,0 +1,2 @@
+module MeetingScheduleCandidateHelper
+end

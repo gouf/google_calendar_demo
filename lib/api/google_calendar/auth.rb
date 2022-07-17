@@ -2,45 +2,25 @@
 
 require 'google/apis/calendar_v3'
 require 'googleauth'
-require 'googleauth/stores/file_token_store'
-require 'fileutils'
+require 'google/api_client/client_secrets'
+
 
 class GoogleCalendar
   class Auth
-    OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
-    TOKEN_PATH = File.join(__dir__, 'token.yaml')
-    APPLICATION_NAME = 'Google Calendar API Ruby Quickstart'
-    CREDENTIALS_PATH = File.join(__dir__, 'credentials.json')
-    SCOPE = Google::Apis::CalendarV3::AUTH_CALENDAR_EVENTS
-    USER_ID = 'default'
+    APPLICATION_NAME = 'Schedule Candidate'
 
     class << self
-      def authorize
-        authorizer =
-          Google::Auth::UserAuthorizer.new(
-            Google::Auth::ClientId.from_file(CREDENTIALS_PATH),
-            SCOPE,
-            Google::Auth::Stores::FileTokenStore.new(file: TOKEN_PATH)
-          )
+      # access_token で認証し、Google Calendar client を返す
+      def authorize(access_token)
+        oauth2_client = ::Signet::OAuth2::Client.new(access_token: access_token)
 
-        credentials = authorizer.get_credentials('default')
+        ::Google::Apis::ClientOptions.default.application_name = APPLICATION_NAME
+        # Google::Apis::ClientOptions.default.application_version = '1.0.0'
 
-        if credentials.nil?
-          url = authorizer.get_authorization_url(base_url: OOB_URI)
+        calendar = ::Google::Apis::CalendarV3::CalendarService.new
+        calendar.authorization = oauth2_client
 
-          puts 'Open the following URL in the browser and enter the ' \
-            "resulting code after authorization:\n" + url
-
-          code = gets
-          credentials =
-            authorizer.get_and_store_credentials_from_code(
-              user_id: USER_ID,
-              code: code,
-              base_url: OOB_URI
-            )
-        end
-
-        credentials
+        calendar
       end
     end
   end

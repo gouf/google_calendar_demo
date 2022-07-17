@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: '名前'
+      meeting_schedule_candidate:
+        date: '候補日'
+  helpers:
+    label:
+      user:
+        name: '名前'
+      meeting_schedule_candidate:
+        date: '候補日'
+        description: '詳細メモ'
+  date:
+    formats:
+      default: "%Y年%-m月%-d日"
+    day_names:
+      - 日
+      - 月
+      - 火
+      - 水
+      - 木
+      - 金
+      - 土
+  time:
+    formats:
+      default: "%Y年%-m月%-d日 (%A) %H:%M"
