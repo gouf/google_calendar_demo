@@ -45,11 +45,11 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'omniauth-google-oauth2'
-gem 'omniauth-rails_csrf_protection'
 gem 'google-api-ruby-client'
 gem 'google-apis-calendar_v3'
 gem 'jsbundling-rails'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 gem 'webpacker'
 
 group :development, :test do
