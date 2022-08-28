@@ -5,6 +5,7 @@ class MeetingScheduleConfirmController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       anchor = MeetingSchedule::Anchor.find(params[:anchor_id])
+      calendar = google_calendar_client
 
       confirmed_schedule =
         removing_candidates.find { |candidate| candidate.id.eql?(params[:candidate_id].to_i) }.dup
@@ -14,13 +15,23 @@ class MeetingScheduleConfirmController < ApplicationController
       # 外部キー制約を回避, 不要データの削除
       anchor.meeting_schedule_groups.destroy_all
 
-      raise RuntimeError, 'Candidates cannot be zero size.' if candidates.size.zero?
+      raise RuntimeError, 'Candidates size cannot be zero.' if candidates.size.zero?
+
       candidates.each do |candidate|
+        calendar.delete_event(event_id: candidate.google_calendar_id)
+
         candidate.destroy!
       end
 
-      confirmed_schedule.summary = '面談'
-      confirmed_schedule.create_google_calendar_event
+      calendar_event =
+        calendar.register_event({
+          summary: '面談',
+          description: confirmed_schedule.description,
+          start_date_time: confirmed_schedule.date
+        })
+
+      confirmed_schedule.google_calendar_id = calendar_event.id
+      confirmed_schedule.save!
 
       anchor.destroy
     end
@@ -33,7 +44,12 @@ class MeetingScheduleConfirmController < ApplicationController
   def removing_candidates
     anchor = MeetingSchedule::Anchor.find(params[:anchor_id])
 
-    anchor.meeting_schedule_candidates
-          .map { |candidate| candidate.access_token = session[:access_token]; candidate }
+    anchor.meeting_schedule_candidates.to_a
+  end
+
+  def google_calendar_client
+    ::GoogleCalendar.new(
+      ::GoogleCalendar::Auth.authorize(session[:access_token])
+    )
   end
 end
