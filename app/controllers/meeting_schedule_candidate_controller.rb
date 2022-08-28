@@ -5,51 +5,21 @@ class MeetingScheduleCandidateController < ApplicationController
   # (レコードにイベントを登録することで Google Calendar 側の ID の保持・管理ができる)
   # (カレンダー情報の更新削除ができる)
   def create
-    candidate_hash = build_schedule_candidates_structure
-
     # View から 3 レコード分送られてくるので処理
     #
     # Anchor -> Group -> Candidate の関連をもたせたレコードを作成
     # current_user.id があれば Anchor から Candidate を引っ張ってこられる
     MeetingSchedule::Candidate.transaction do
-      calendar = google_calendar_client
-
       anchor = MeetingSchedule::Anchor.new(user_id: current_user.id)
       anchor.save!
+
+      candidate_hash = build_schedule_candidates_structure
 
       # 3 レコード分送られてくるので 受け入れインスタンスを生成する
       # 予定の確定など あとで使うのでレコードに保存
       # Google Calednar で予定が確認できるように API 経由で予定の作成
       candidate_hash[:days].each do |candidate_day|
-        #
-        # Candidate レコード作成
-        #
-        candidate = MeetingSchedule::Candidate.new
-
-        # NOTE: schedule_candidate_day は日付情報のみ保持 (eg. "2022-06-24")
-        # NOTE: 作成するイベントの日時は 14:00〜17:00 に固定しているので 開始時刻は 14:00 設定
-        candidate.date = "#{candidate_day} 14:00:00"
-        candidate.description = candidate_hash[:description]
-
-        calendar_event =
-          calendar.register_event({
-            summary: '(面談予定)',
-            description: candidate_hash[:description],
-            start_date_time: candidate.date
-          })
-        candidate.google_calendar_id = calendar_event.id
-
-        candidate.save!
-
-        #
-        # Group レコード作成
-        #
-        group =
-          MeetingSchedule::Group.new(
-            meeting_schedule_anchor_id: anchor.id,
-            meeting_schedule_candidate_id: candidate.id
-          )
-        group.save!
+        create_record_and_event(candidate_day, anchor.id, candidate_hash[:description])
       end
     end
 
@@ -88,6 +58,49 @@ class MeetingScheduleCandidateController < ApplicationController
   # for filter method
   def only_schedule_candidate_description(schedule_candidate)
     schedule_candidate.dig(:description).present?
+  end
+
+  def create_group(anchor_id, candidate_id)
+    group =
+      MeetingSchedule::Group.new(
+        meeting_schedule_anchor_id: anchor_id,
+        meeting_schedule_candidate_id: candidate_id
+      )
+    group.save!
+  end
+
+  def create_calendnar_event(start_date_time, description)
+    calendar = google_calendar_client
+
+    calendar.register_event({
+      summary: '(面談予定)',
+      description: description,
+      start_date_time: start_date_time
+    })
+  end
+
+  def create_record_and_event(candidate_day, anchor_id, description)
+    #
+    # Candidate レコード作成
+    #
+    candidate = MeetingSchedule::Candidate.new
+
+    # NOTE: candidate_day は日付情報のみ保持 (eg. "2022-06-24")
+    # NOTE: 作成するイベントの日時は 14:00〜17:00 に固定しているので 開始時刻は 14:00 設定
+    # Ref: lib/api/google_calendar.rb #register_event
+    candidate.date = "#{candidate_day} 14:00:00"
+    candidate.description = description
+
+    calendar_event = create_calendnar_event(candidate.date, candidate.description)
+
+    candidate.google_calendar_id = calendar_event.id
+
+    candidate.save!
+
+    #
+    # Group レコード作成
+    #
+    create_group(anchor_id, candidate.id)
   end
 
   def google_calendar_client
