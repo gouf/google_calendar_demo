@@ -12,23 +12,32 @@ class MeetingScheduleCandidateController < ApplicationController
     # Anchor -> Group -> Candidate の関連をもたせたレコードを作成
     # current_user.id があれば Anchor から Candidate を引っ張ってこられる
     MeetingSchedule::Candidate.transaction do
+      calendar = google_calendar_client
 
       anchor = MeetingSchedule::Anchor.new(user_id: current_user.id)
       anchor.save!
 
       # 3 レコード分送られてくるので 受け入れインスタンスを生成する
+      # 予定の確定など あとで使うのでレコードに保存
+      # Google Calednar で予定が確認できるように API 経由で予定の作成
       candidate_hash[:days].each do |candidate_day|
         #
         # Candidate レコード作成
         #
         candidate = MeetingSchedule::Candidate.new
 
-        # NOTE: モデルに Google Calendar API へのアクセスを任せているので、何らかの形で access_token を渡す必要がある
-        candidate.access_token = session[:access_token]
-        candidate.description = candidate_hash[:description]
         # NOTE: schedule_candidate_day は日付情報のみ保持 (eg. "2022-06-24")
         # NOTE: 作成するイベントの日時は 14:00〜17:00 に固定しているので 開始時刻は 14:00 設定
         candidate.date = "#{candidate_day} 14:00:00"
+        candidate.description = candidate_hash[:description]
+
+        calendar_event =
+          calendar.register_event({
+            summary: '(面談予定)',
+            description: candidate_hash[:description],
+            start_date_time: candidate.date
+          })
+        candidate.google_calendar_id = calendar_event.id
 
         candidate.save!
 
@@ -79,5 +88,11 @@ class MeetingScheduleCandidateController < ApplicationController
   # for filter method
   def only_schedule_candidate_description(schedule_candidate)
     schedule_candidate.dig(:description).present?
+  end
+
+  def google_calendar_client
+    ::GoogleCalendar.new(
+      ::GoogleCalendar::Auth.authorize(session[:access_token])
+    )
   end
 end

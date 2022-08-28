@@ -8,12 +8,13 @@ class MeetingScheduleAnchorController < ApplicationController
       anchor = MeetingSchedule::Anchor.find(params[:id])
       candidates = anchor.meeting_schedule_candidates.to_a
       groups = anchor.meeting_schedule_groups
+      calendar = google_calendar_client
 
       groups.destroy_all
 
       candidates.each do |candidate|
-        # FIXME: session からアクセストークンを持ってこないで、別の方法で candidate が自動的にアクセスできるように処理・設計を変更する
-        candidate.access_token = session[:access_token]
+        calendar.delete_event(event_id: candidate.google_calendar_id)
+
         candidate.destroy!
       end
 
@@ -21,5 +22,13 @@ class MeetingScheduleAnchorController < ApplicationController
     end
 
     redirect_to root_path
+  end
+
+  private
+
+  def google_calendar_client
+    ::GoogleCalendar.new(
+      ::GoogleCalendar::Auth.authorize(session[:access_token])
+    )
   end
 end
