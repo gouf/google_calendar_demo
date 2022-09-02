@@ -14,8 +14,6 @@ class MeetingScheduleConfirmController < ApplicationController
       # 外部キー制約を回避, 不要データの削除
       anchor.meeting_schedule_groups.destroy_all
 
-      raise RuntimeError, 'Candidates size cannot be zero.' if candidates.size.zero?
-
       remove_record_and_calendar_events(candidates)
 
       calendar_event = create_confirmed_calendar_event(confirmed_schedule)
@@ -34,7 +32,11 @@ class MeetingScheduleConfirmController < ApplicationController
   def removing_candidates
     anchor = MeetingSchedule::Anchor.find(params[:anchor_id])
 
-    anchor.meeting_schedule_candidates.to_a
+    candidates = anchor.meeting_schedule_candidates.to_a
+
+    raise RuntimeError, 'Candidates size cannot be zero.' if candidates.size.zero?
+
+    candidates
   end
 
   def create_confirmed_calendar_event(confirmed_schedule)
