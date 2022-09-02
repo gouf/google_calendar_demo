@@ -9,7 +9,7 @@ class MeetingScheduleConfirmController < ApplicationController
 
       confirmed_schedule =
         removing_candidates.find { |candidate| candidate.id.eql?(params[:candidate_id].to_i) }.dup
-      # NOTE: 後続の行で Group を削除する都合上、その削除前に candidates を確保しないと association による参照が不能になり空の配列が返る
+      # NOTE: 後続の行で Group を削除する都合上、その削除前に candidates を確保する。 (処理順が前後すると association による参照が不能になり空の配列が返る)
       candidates = removing_candidates
 
       # 外部キー制約を回避, 不要データの削除
