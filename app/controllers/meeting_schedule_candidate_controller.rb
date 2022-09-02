@@ -28,11 +28,6 @@ class MeetingScheduleCandidateController < ApplicationController
     log_out
   end
 
-  def destroy
-    # TODO: レコードの削除
-    # TODO: レコードの削除と同時に、関連付けられた Google Calendar のイベントを削除する
-  end
-
   private
 
   def schedule_candidates_params
