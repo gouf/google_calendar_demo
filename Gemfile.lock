@@ -406,7 +406,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.4.4)
     squasher (0.6.2)
-    stimulus-rails (1.0.4)
+    stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     strscan (3.0.4)
     temple (0.8.2)
