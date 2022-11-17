@@ -66,7 +66,7 @@ class CopyPaste {
 
     return [
       selectedDate.getFullYear(),
-      selectedDate.getMonth(),
+      selectedDate.getMonth() + 1, // 1月は「0」が返ってくる
       selectedDate.getDate(),
       dayOfWeek[selectedDate.getDay()]
     ]
