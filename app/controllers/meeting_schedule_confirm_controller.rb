@@ -48,7 +48,7 @@ class MeetingScheduleConfirmController < ApplicationController
   end
 
   def remove_record_and_calendar_events(schedule_candidates)
-    candidates.each do |candidate|
+    schedule_candidates.each do |candidate|
       google_calendar_client.delete_event(event_id: candidate.google_calendar_id)
 
       candidate.destroy!
