@@ -83,7 +83,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.14.0)
       msgpack (~> 1.2)
-    bootstrap (5.2.2)
+    bootstrap (5.2.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.6, < 3)
       sassc-rails (>= 2.0.0)
@@ -448,7 +448,7 @@ GEM
       nokogiri (~> 1.8)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.5)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-darwin-21
