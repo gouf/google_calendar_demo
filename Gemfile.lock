@@ -279,7 +279,7 @@ GEM
     public_suffix (5.0.0)
     puma (6.0.0)
       nio4r (~> 2.0)
-    racc (1.6.0)
+    racc (1.6.1)
     rack (2.2.4)
     rack-protection (2.2.2)
       rack
@@ -405,7 +405,7 @@ GEM
     sqlite3 (1.5.4-x86_64-darwin)
     sqlite3 (1.5.4-x86_64-linux)
     squasher (0.7.0)
-    stimulus-rails (1.1.1)
+    stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     strscan (3.0.4)
     temple (0.8.2)
