@@ -402,7 +402,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.6.2-x86_64-darwin)
     sqlite3 (1.6.2-x86_64-linux)
-    squasher (0.7.1)
+    squasher (0.7.2)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     temple (0.10.0)
