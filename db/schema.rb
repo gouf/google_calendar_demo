@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_13_121906) do
-  create_table "meeting_schedule_anchors", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_meeting_schedule_anchors_on_user_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_04_18_105844) do
   create_table "meeting_schedule_candidates", force: :cascade do |t|
     t.string "google_calendar_id"
     t.text "description"
@@ -42,7 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_13_121906) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "meeting_schedule_anchors", "users"
   add_foreign_key "meeting_schedule_groups", "meeting_schedule_anchors"
   add_foreign_key "meeting_schedule_groups", "meeting_schedule_candidates"
 end
