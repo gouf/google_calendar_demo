@@ -363,7 +363,7 @@ GEM
       trailblazer-option (>= 0.1.1, < 0.2.0)
       uber (< 0.2.0)
     retriable (3.1.2)
-    rexml (3.3.8)
+    rexml (3.3.9)
     rouge (4.4.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
@@ -409,7 +409,7 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.3.1)
-    selenium-webdriver (4.25.0)
+    selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
