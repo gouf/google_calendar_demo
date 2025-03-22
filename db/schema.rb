@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_13_121906) do
+ActiveRecord::Schema[7.2].define(version: 2022_07_13_121906) do
   create_table "meeting_schedule_anchors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
