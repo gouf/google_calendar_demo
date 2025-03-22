@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Schedule do
+describe MeetingSchedule do
   context 'creating schedule candidates under Schedule' do
     let(:date) { DateTime.new(2019, 10, 1, 14, 0, 0, '+09:00') }
 
