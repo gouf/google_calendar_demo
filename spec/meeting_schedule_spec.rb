@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 describe MeetingSchedule do
-  context 'creating schedule candidates under Schedule' do
+  context 'creating schedule candidates under MeetingSchedule' do
     let(:date) { DateTime.new(2019, 10, 1, 14, 0, 0, '+09:00') }
 
-    let(:schedule) { build(:schedule) }
+    let(:meeting_schedule) { build(:meeting_schedule) }
 
     let(:candidate_count) { 3 }
 
     before do
-      schedule.save!
+      meeting_schedule.save!
       VCR.use_cassette('schedule') do
         candidate_count.times do |i|
           build(
             :schedule_candidate,
-            schedule_id: schedule.id,
+            schedule_id: meeting_schedule.id,
             datetime: date.advance(days: i)
           ).save!
         end
@@ -22,7 +22,7 @@ describe MeetingSchedule do
     end
 
     it 'refer chandidates count be 3' do
-      expect(schedule.schedule_candidates.count).to eq candidate_count
+      expect(meeting_schedule.schedule_candidates.count).to eq candidate_count
     end
   end
 end
