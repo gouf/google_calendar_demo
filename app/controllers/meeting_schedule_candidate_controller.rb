@@ -31,8 +31,9 @@ class MeetingScheduleCandidateController < ApplicationController
   private
 
   def schedule_candidates_params
-    params.require(:meeting_schedule_candidate)
-          .map { |d| d.permit(:date, :description) }
+    # 複数のレコードを処理するため、配列として扱う
+    params.require('[meeting_schedule_candidate]')
+          .map { _1.permit(:date, :description) }
   end
 
   # create アクションでモデルに情報を渡しやすいように Hash にまとめる
